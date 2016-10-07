@@ -6,7 +6,7 @@
 % Version		1
 %=============================================================================
 
-function [sys,x0,str,ts] = CD1_sfun_Muskingum_Catchment(t,x,u,flag,tstep,CX,CY,n_comp,N)
+function [sys,x0,str,ts] = CD1_sfun_Muskingum_Catchment(t,x,u,flag,tstep,CX,CY,n_comp,N, K, X)
 
 % Parameters / All provided by block--> IMPORTANT
 % tstep     ...Global (discrete) time step for sampling
@@ -33,7 +33,7 @@ N=round(N);
 
 switch flag,
     case 0,
-        [sys,x0,str,ts] = mdlInitializeSizes(n_comp,N,tstep);
+        [sys,x0,str,ts] = mdlInitialize(n_comp,N,tstep,CX,CY, K, X);
 
     case 2,
         sys = mdlUpdate(t,x,u);
@@ -54,7 +54,7 @@ end
 % Return the sizes, initial conditions, and sample times for the S-function.
 %=======================================================================
 %
-function [sys,x0,str,ts] = mdlInitializeSizes(n_comp,N,tstep)
+function [sys,x0,str,ts] = mdlInitialize(n_comp,N,tstep,CX,CY, K, X)
 
 sizes = simsizes;
 
@@ -75,6 +75,14 @@ ts  = [tstep 0]; % driven by global timesteps defined
 
 u_dat.volume=zeros(N*(n_comp+1));
 set_param(gcb,'UserData',u_dat);
+
+% instability warnings
+
+if(tstep>K || CX<0 || CY<0)
+    warning('Catchment could be numerically unstable'); % add name of the catchment here??How?
+end
+
+
 
 % mdlUpdate
 

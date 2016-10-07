@@ -37,7 +37,7 @@ N=round(N);
 
 switch flag,
   case 0,
-    [sys,x0,str,ts] = mdlInitializeSizes(n_comp,N,tstep);
+    [sys,x0,str,ts] = mdlInitialize(n_comp,N,tstep);
 
   case 2,                                                
     sys = mdlUpdate(t,x,u); 
@@ -58,7 +58,7 @@ end
 % Return the sizes, initial conditions, and sample times for the S-function.
 %=======================================================================
 %
-function [sys,x0,str,ts] = mdlInitializeSizes(n_comp,N,tstep)
+function [sys,x0,str,ts] = mdlInitialize(n_comp,N,tstep)
 
 sizes = simsizes;
 
@@ -83,6 +83,12 @@ ts  = [tstep 0]; % driven by global timesteps defined
 u_dat.volume=zeros(N*(n_comp+1));
 
 set_param(gcb,'UserData',u_dat);
+
+% instability warnings
+if(tstep>K || CA<0 || CB<0)
+    warning('Catchment could be numerically unstable'); % add name of the catchment here??How?
+end
+
 
 % mdlUpdate
 
