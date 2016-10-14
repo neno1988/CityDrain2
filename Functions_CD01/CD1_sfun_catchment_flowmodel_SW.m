@@ -16,16 +16,16 @@ function [sys,x0,str,ts] = CD1_sfun_catchment_flowmodel_SW(t,x,u,flag,area,n_com
 % Output in m3/s and g/m3
 
 % The following outlines the general structure of an S-function.
-switch flag,
-  case 0,
-    [sys,x0,str,ts]=mdlInitializeSizes(tstep,n_comp);   
-  case 3,
-    sys = mdlOutputs(t,x,u,area,n_comp,Rain_C,tstep);
-  case {1,2,4,9}  
-     sys=[];    
-  otherwise
-     error(['Unhandled flag = ',num2str(flag)]);
-  end
+switch flag
+    case 0,
+        [sys,x0,str,ts]=mdlInitializeSizes(tstep,n_comp);
+    case 3,
+        sys = mdlOutputs(t,x,u,area,n_comp,Rain_C,tstep);
+    case {1,2,4,9}
+        sys=[];
+    otherwise
+        error(['Unhandled flag = ',num2str(flag)]);
+end
 %=============================================================================
 
 
