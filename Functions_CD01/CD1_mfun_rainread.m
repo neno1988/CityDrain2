@@ -40,7 +40,8 @@ timess = timedd.*24.*60.*60.+3600*hh+60*mm+ss; %convert days to seconds an add d
 simtime = timess - min(timess); %setting smallest time to zero
 
 A=[simtime,vol];
-step=300; %use timstep calc from mse instead?
+step = simtime(2)-simtime(1); % added by Neno
+% step=300; %use timstep calc from mse instead?
 
 
 
