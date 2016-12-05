@@ -37,7 +37,7 @@ N=round(N);
 
 switch flag,
   case 0,
-    [sys,x0,str,ts] = mdlInitialize(n_comp,N,tstep);
+    [sys,x0,str,ts] = mdlInitialize(n_comp,N,tstep,CA,CB, K);
 
   case 2,                                                
     sys = mdlUpdate(t,x,u); 
@@ -58,7 +58,7 @@ end
 % Return the sizes, initial conditions, and sample times for the S-function.
 %=======================================================================
 %
-function [sys,x0,str,ts] = mdlInitialize(n_comp,N,tstep)
+function [sys,x0,str,ts] = mdlInitialize(n_comp,N,tstep,CA,CB, K)
 
 sizes = simsizes;
 
