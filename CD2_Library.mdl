@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.304"
+    ComputedModelVersion    "1.307"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [373.0, 115.0, 1278.0, 932.0]
+      Location		      [1912.0, 48.0, 1296.0, 1040.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -54,9 +54,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1228.0, 758.0]
+	Extents			[1246.0, 866.0]
 	ZoomFactor		[0.8]
-	Offset			[-76.741313789359992, -0.5]
+	Offset			[-237.21666666666567, 152.6333333333331]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "garbanlo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Oct 24 12:02:38 2016"
-  RTWModifiedTimeStamp	  399211241
-  ModelVersionFormat	  "1.%<AutoIncrement:304>"
+  LastModifiedDate	  "Tue Feb 21 15:36:45 2017"
+  RTWModifiedTimeStamp	  409592203
+  ModelVersionFormat	  "1.%<AutoIncrement:307>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -925,7 +925,7 @@ Model {
   }
   System {
     Name		    "CD2_Library"
-    Location		    [373, 115, 1651, 1047]
+    Location		    [1912, 48, 3208, 1088]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -939,7 +939,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "343"
+    SIDHighWatermark	    "358"
     Block {
       BlockType		      SubSystem
       Name		      " 1"
@@ -2484,7 +2484,7 @@ Model {
       }
       System {
 	Name			"Catchment CSS"
-	Location		[373, 115, 1651, 1047]
+	Location		[1912, 48, 3208, 1088]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2635,7 +2635,7 @@ Model {
 	  Position		  [720, 137, 890, 173]
 	  ZOrder		  -13
 	  FunctionName		  "CD1_sfun_Muskingum_Catchment"
-	  Parameters		  "tstep, CX, CY, n_comp,N"
+	  Parameters		  "tstep, CX, CY, n_comp,N, K, X"
 	  SFunctionDeploymentMode off
 	  EnableBusSupport	  off
 	}
@@ -4623,7 +4623,7 @@ Model {
       Name		      "Pumping Station"
       SID		      "156"
       Ports		      [1, 3]
-      Position		      [415, 554, 530, 646]
+      Position		      [460, 689, 575, 781]
       ZOrder		      -26
       BackgroundColor	      "gray"
       RequestExecContextInheritance off
@@ -5002,6 +5002,469 @@ Model {
     }
     Block {
       BlockType		      SubSystem
+      Name		      "RUEB"
+      SID		      "344"
+      Ports		      [3, 3]
+      Position		      [435, 577, 605, 653]
+      ZOrder		      392038
+      BackgroundColor	      "gray"
+      RequestExecContextInheritance off
+      Variant		      off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		124
+	$ClassName		"Simulink.Mask"
+	Type			"CSO Typ B - Combined sewer overflow"
+	Description		"Combined sewer overflow structure. \nDiverts the inflow given into effluent and overflow. The model imp"
+	"lemented consideres hydraulics and pollutant routing by full mixing in the structure. \n\nIn addition to Type B the i"
+	"mplementation of flowing water without entering the RUEB and implementation of emptying pumps\n\nFunctions used:\nCD1"
+	"_sfun_cso_Neno.m\nCD1_sfun_mixing_QC.m"
+	Initialization		"% reading the toplevel systems' name \n% --> Plant file name;\ntls=bdroot(gcb); \n% Obtaining the fi"
+	"xed sampling time\nt_samp_char=get_param(tls, 'FixedStep');\n% Convertion to numeric value\ntstep = str2num(t_samp_ch"
+	"ar); "
+	Display			"\nplot(0,0,100,100);\n\n\ntext(50,60,'CSO','HorizontalAlignment','center');\ntext(50,30,'Typ Neno-RUEB','H"
+	"orizontalAlignment','center');\n\n\nport_label('input',1,'Q_soll');\nport_label('input',2,'Pump [I/O]');\nport_label("
+	"'input',3,'Qin');\n\nport_label('output',1,'Qw');\nport_label('output',2,'Qe');\nport_label('output',3,'Vi');\n"
+	IconRotate		"port"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  4
+	  Object {
+	    $ObjectID		    125
+	    Type		    "edit"
+	    Name		    "Vmax"
+	    Prompt		    "Basin Volume (m3)"
+	    Value		    "80.89"
+	  }
+	  Object {
+	    $ObjectID		    126
+	    Type		    "edit"
+	    Name		    "pumpRate"
+	    Prompt		    "Pump Rate [m3/s]"
+	    Value		    "0.005"
+	  }
+	  Object {
+	    $ObjectID		    127
+	    Type		    "edit"
+	    Name		    "n_comp"
+	    Prompt		    "Number of Pollutants [-]"
+	    Value		    "CD2_get_substances_count"
+	  }
+	  Object {
+	    $ObjectID		    128
+	    Type		    "edit"
+	    Name		    "n_sed"
+	    Prompt		    "n-sed (Vect. of Sed. Coefficients)"
+	    Value		    "[0.0]*ones(1,3)"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
+      System {
+	Name			"RUEB"
+	Location		[1912, 48, 3208, 1088]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Q_soll_MID"
+	  SID			  "345"
+	  Position		  [70, 248, 100, 262]
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Pump I/O\n"
+	  SID			  "346"
+	  Position		  [80, 163, 110, 177]
+	  ZOrder		  192
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Qin"
+	  SID			  "347"
+	  Position		  [70, 283, 100, 297]
+	  ZOrder		  2
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  S-Function
+	  Name			  "CSO FirstFlush1"
+	  SID			  "348"
+	  Ports			  [1, 1]
+	  Position		  [385, 145, 515, 185]
+	  ZOrder		  -2
+	  FunctionName		  "CD1_sfun_cso_B_controllable"
+	  Parameters		  "Vmax,n_comp,n_sed,tstep"
+	  SFunctionDeploymentMode off
+	  EnableBusSupport	  off
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  SID			  "349"
+	  Ports			  [1, 3]
+	  Position		  [550, 82, 555, 248]
+	  ZOrder		  -3
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "[ (n_comp+1) (n_comp+1) (n_comp+1)]"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  SID			  "350"
+	  Ports			  [2, 1]
+	  Position		  [355, 146, 360, 184]
+	  ZOrder		  197
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux2"
+	  SID			  "351"
+	  Ports			  [2, 1]
+	  Position		  [695, 246, 700, 299]
+	  ZOrder		  196
+	  ShowName		  off
+	  Inputs		  "[n_comp+1,n_comp+1]"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Product
+	  Name			  "Product"
+	  SID			  "352"
+	  Ports			  [2, 1]
+	  Position		  [285, 137, 315, 168]
+	  ZOrder		  199
+	  InputSameDT		  off
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  RndMeth		  "Floor"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "PumpRate"
+	  SID			  "353"
+	  Position		  [130, 115, 235, 145]
+	  ZOrder		  187
+	  Value			  "pumpRate"
+	}
+	Block {
+	  BlockType		  S-Function
+	  Name			  "S-Function2"
+	  SID			  "354"
+	  Ports			  [1, 1]
+	  Position		  [735, 259, 845, 291]
+	  ZOrder		  195
+	  FunctionName		  "CD1_sfun_mixing_QC"
+	  Parameters		  "n_comp,tstep"
+	  SFunctionDeploymentMode off
+	  EnableBusSupport	  off
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Through and RUEB flows\n"
+	  SID			  "355"
+	  Ports			  [2, 2]
+	  Position		  [160, 239, 280, 301]
+	  ZOrder		  191
+	  LibraryVersion	  "1.32"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  RequestExecContextInheritance	off
+	  SFBlockType		  "MATLAB Function"
+	  Variant		  off
+	  System {
+	    Name		    "Through and RUEB flows\n"
+	    Location		    [223, 338, 826, 833]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "26"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Qsoll"
+	      SID		      "355::1"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Qin"
+	      SID		      "355::19"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      10
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "355::25"
+	      Ports		      [1, 1]
+	      Position		      [270, 230, 320, 270]
+	      ZOrder		      16
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "355::24"
+	      Tag		      "Stateflow S-Function CD2_Library 21"
+	      Ports		      [2, 3]
+	      Position		      [180, 100, 230, 180]
+	      ZOrder		      15
+	      FunctionName	      "sf_sfun"
+	      PortCounts	      "[2 3]"
+	      SFunctionDeploymentMode off
+	      EnableBusSupport	      on
+	      Port {
+		PortNumber		2
+		Name			"Qrueb"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"Qthrough"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "355::26"
+	      Position		      [460, 241, 480, 259]
+	      ZOrder		      17
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Qrueb"
+	      SID		      "355::20"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      11
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Qthrough"
+	      SID		      "355::5"
+	      Position		      [460, 136, 480, 154]
+	      ZOrder		      -5
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      ZOrder		      1
+	      SrcBlock		      "Qsoll"
+	      SrcPort		      1
+	      Points		      [120, 0]
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      2
+	      SrcBlock		      "Qin"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      Name		      "Qrueb"
+	      ZOrder		      3
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "Qrueb"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "Qthrough"
+	      ZOrder		      4
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      3
+	      DstBlock		      "Qthrough"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      5
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      6
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Qw"
+	  SID			  "356"
+	  Position		  [600, 103, 630, 117]
+	  ZOrder		  -4
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Qe"
+	  SID			  "357"
+	  Position		  [870, 268, 900, 282]
+	  ZOrder		  -5
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Vi"
+	  SID			  "358"
+	  Position		  [600, 213, 630, 227]
+	  ZOrder		  -6
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  1
+	  SrcBlock		  "S-Function2"
+	  SrcPort		  1
+	  DstBlock		  "Qe"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  2
+	  SrcBlock		  "CSO FirstFlush1"
+	  SrcPort		  1
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "Through and RUEB flows\n"
+	  SrcPort		  2
+	  DstBlock		  "Mux2"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  4
+	  SrcBlock		  "Through and RUEB flows\n"
+	  SrcPort		  1
+	  Points		  [40, 0; 0, -80]
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  5
+	  SrcBlock		  "PumpRate"
+	  SrcPort		  1
+	  Points		  [3, 0; 0, 15]
+	  DstBlock		  "Product"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  6
+	  SrcBlock		  "Product"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  7
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "CSO FirstFlush1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  8
+	  SrcBlock		  "Q_soll_MID"
+	  SrcPort		  1
+	  DstBlock		  "Through and RUEB flows\n"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  9
+	  SrcBlock		  "Mux2"
+	  SrcPort		  1
+	  DstBlock		  "S-Function2"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  10
+	  SrcBlock		  "Demux"
+	  SrcPort		  3
+	  DstBlock		  "Vi"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  11
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [106, 0; 0, 95]
+	  DstBlock		  "Mux2"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  12
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  DstBlock		  "Qw"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  13
+	  SrcBlock		  "Pump I/O\n"
+	  SrcPort		  1
+	  Points		  [129, 0; 0, -10]
+	  DstBlock		  "Product"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  14
+	  SrcBlock		  "Qin"
+	  SrcPort		  1
+	  Points		  [25, 0; 0, -5]
+	  DstBlock		  "Through and RUEB flows\n"
+	  DstPort		  2
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
       Name		      "RainReadFromMatFile"
       SID		      "337"
       Ports		      [0, 1]
@@ -5012,7 +5475,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		124
+	$ObjectID		129
 	$ClassName		"Simulink.Mask"
 	Type			"Rain Read"
 	Description		"Read rain data values from a variable in the specified MAT-file. The rain data has to be saved in mm/dt"
@@ -5036,7 +5499,7 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  2
 	  Object {
-	    $ObjectID		    125
+	    $ObjectID		    130
 	    Type		    "promote"
 	    Array {
 	      Type		      "Cell"
@@ -5051,7 +5514,7 @@ Model {
 	    Tunable		    "off"
 	  }
 	  Object {
-	    $ObjectID		    126
+	    $ObjectID		    131
 	    Type		    "promote"
 	    Array {
 	      Type		      "Cell"
@@ -5071,12 +5534,12 @@ Model {
 	  Type			  "Simulink.dialog.Control"
 	  Dimension		  4
 	  Object {
-	    $ObjectID		    127
+	    $ObjectID		    132
 	    $ClassName		    "Simulink.dialog.Group"
 	    Prompt		    "%<MaskType>"
 	    Object {
 	      $PropName		      "DialogControls"
-	      $ObjectID		      128
+	      $ObjectID		      133
 	      $ClassName	      "Simulink.dialog.Text"
 	      Prompt		      "%<MaskDescription>"
 	      Name		      "DescTextVar"
@@ -5084,18 +5547,18 @@ Model {
 	    Name		    "DescGroupVar"
 	  }
 	  Object {
-	    $ObjectID		    129
+	    $ObjectID		    134
 	    $ClassName		    "Simulink.dialog.Group"
 	    Prompt		    "Simulink:studio:ToolBarParametersMenu"
 	    Name		    "ParameterGroupVar"
 	  }
 	  Object {
-	    $ObjectID		    130
+	    $ObjectID		    135
 	    $ClassName		    "Simulink.dialog.parameter.Edit"
 	    Name		    "FileName"
 	  }
 	  Object {
-	    $ObjectID		    131
+	    $ObjectID		    136
 	    $ClassName		    "Simulink.dialog.parameter.Popup"
 	    PromptLocation	    "top"
 	    Name		    "InterpolationWithinTimeRange"
@@ -5230,7 +5693,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		132
+	$ObjectID		137
 	$ClassName		"Simulink.Mask"
 	Initialization		"% reading the toplevel systems' name\n%-------------------------------------------------------------"
 	"--------\ntls=bdroot(gcb); \n% Obtaining the fixed sampling time\nt_samp_char=get_param(tls, 'FixedStep');\n% Convert"
@@ -5246,7 +5709,7 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  2
 	  Object {
-	    $ObjectID		    133
+	    $ObjectID		    138
 	    Type		    "promote"
 	    Array {
 	      Type		      "Cell"
@@ -5260,7 +5723,7 @@ Model {
 	    Tunable		    "off"
 	  }
 	  Object {
-	    $ObjectID		    134
+	    $ObjectID		    139
 	    Type		    "promote"
 	    Array {
 	      Type		      "Cell"
@@ -5407,7 +5870,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		135
+	$ObjectID		140
 	$ClassName		"Simulink.Mask"
 	Type			"Rain Read"
 	Description		"Read raindata from ASCII File in following formats:\n\n*.ixx ... Format used by the Austrian Hydrograph"
@@ -5422,14 +5885,14 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  2
 	  Object {
-	    $ObjectID		    136
+	    $ObjectID		    141
 	    Type		    "edit"
 	    Name		    "table0"
 	    Prompt		    "Filename"
 	    Value		    "'test2.km2'"
 	  }
 	  Object {
-	    $ObjectID		    137
+	    $ObjectID		    142
 	    Type		    "checkbox"
 	    Name		    "crep"
 	    Prompt		    "Cylic repitition"
@@ -5495,7 +5958,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		138
+	$ObjectID		143
 	$ClassName		"Simulink.Mask"
 	Type			"Retention Catchment CSS"
 	Description		"Hydrological model of an urban catchment with a combined sewer system. \nIncluding additional retention"
@@ -5515,84 +5978,84 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  12
 	  Object {
-	    $ObjectID		    139
+	    $ObjectID		    144
 	    Type		    "edit"
 	    Name		    "area"
 	    Prompt		    "Area in [ha]"
 	    Value		    "208"
 	  }
 	  Object {
-	    $ObjectID		    140
+	    $ObjectID		    145
 	    Type		    "edit"
 	    Name		    "rfcoeff"
 	    Prompt		    "Runoff coefficient (0 - 1)"
 	    Value		    "0.20"
 	  }
 	  Object {
-	    $ObjectID		    141
+	    $ObjectID		    146
 	    Type		    "edit"
 	    Name		    "initloss"
 	    Prompt		    "Initial Loss in [mm]"
 	    Value		    "1"
 	  }
 	  Object {
-	    $ObjectID		    142
+	    $ObjectID		    147
 	    Type		    "edit"
 	    Name		    "permloss"
 	    Prompt		    "Permanent loss in [mm/day]"
 	    Value		    "1.25"
 	  }
 	  Object {
-	    $ObjectID		    143
+	    $ObjectID		    148
 	    Type		    "edit"
 	    Name		    "N"
 	    Prompt		    "No of Timesteps (transport time) / No of subareas n [-]"
 	    Value		    "3"
 	  }
 	  Object {
-	    $ObjectID		    144
+	    $ObjectID		    149
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "No of pollutant components"
 	    Value		    "CD2_get_substances_count"
 	  }
 	  Object {
-	    $ObjectID		    145
+	    $ObjectID		    150
 	    Type		    "edit"
 	    Name		    "Rain_C"
 	    Prompt		    "Vector of Rain-Conc. [g/m3]"
 	    Value		    "1"
 	  }
 	  Object {
-	    $ObjectID		    146
+	    $ObjectID		    151
 	    Type		    "edit"
 	    Name		    "K"
 	    Prompt		    "K"
 	    Value		    "300"
 	  }
 	  Object {
-	    $ObjectID		    147
+	    $ObjectID		    152
 	    Type		    "edit"
 	    Name		    "X"
 	    Prompt		    "X"
 	    Value		    "0"
 	  }
 	  Object {
-	    $ObjectID		    148
+	    $ObjectID		    153
 	    Type		    "edit"
 	    Name		    "Vsmax"
 	    Prompt		    "Storage volume [m3]"
 	    Value		    "100"
 	  }
 	  Object {
-	    $ObjectID		    149
+	    $ObjectID		    154
 	    Type		    "edit"
 	    Name		    "Qemax"
 	    Prompt		    "Maxiumum effluent flow [m3/s]"
 	    Value		    "0.4"
 	  }
 	  Object {
-	    $ObjectID		    150
+	    $ObjectID		    155
 	    Type		    "edit"
 	    Name		    "n_sed"
 	    Prompt		    "n-sed (Vect. of Sed. Coefficients)"
@@ -5676,7 +6139,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    151
+	    $ObjectID		    156
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Catchment SSS - Type B"
 	    Description		    "Simple model of an urban catchment. \nInput ( r ) is a continuous stream of rain data in [mm/DT"
@@ -5700,63 +6163,63 @@ Model {
 	      Type		      "Simulink.MaskParameter"
 	      Dimension		      9
 	      Object {
-		$ObjectID		152
+		$ObjectID		157
 		Type			"edit"
 		Name			"area"
 		Prompt			"Area in [ha]"
 		Value			"area"
 	      }
 	      Object {
-		$ObjectID		153
+		$ObjectID		158
 		Type			"edit"
 		Name			"rfcoeff"
 		Prompt			"Runoff coefficient (0 - 1)"
 		Value			"rfcoeff"
 	      }
 	      Object {
-		$ObjectID		154
+		$ObjectID		159
 		Type			"edit"
 		Name			"initloss"
 		Prompt			"Initial Loss in [mm]"
 		Value			"initloss"
 	      }
 	      Object {
-		$ObjectID		155
+		$ObjectID		160
 		Type			"edit"
 		Name			"permloss"
 		Prompt			"Permanent loss in [mm/day]"
 		Value			"permloss"
 	      }
 	      Object {
-		$ObjectID		156
+		$ObjectID		161
 		Type			"edit"
 		Name			"N"
 		Prompt			"No of Timesteps (transport time) / No of subareas n [-]"
 		Value			"N"
 	      }
 	      Object {
-		$ObjectID		157
+		$ObjectID		162
 		Type			"edit"
 		Name			"n_comp"
 		Prompt			"No of pollutant components"
 		Value			"n_comp"
 	      }
 	      Object {
-		$ObjectID		158
+		$ObjectID		163
 		Type			"edit"
 		Name			"Rain_C"
 		Prompt			"Vector of Rain-Conc. [g/m3]"
 		Value			"Rain_C"
 	      }
 	      Object {
-		$ObjectID		159
+		$ObjectID		164
 		Type			"edit"
 		Name			"K"
 		Prompt			"K"
 		Value			"K"
 	      }
 	      Object {
-		$ObjectID		160
+		$ObjectID		165
 		Type			"edit"
 		Name			"X"
 		Prompt			"X"
@@ -6069,7 +6532,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    161
+	    $ObjectID		    166
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Mixer"
 	    Description		    "Performes mixing of pollutant fluxes Q1 and Q2 in accordance to their hydraulic load.\n\nFuncti"
@@ -6081,7 +6544,7 @@ Model {
 	    "Q1');\nport_label('input',2,'Q2');\nport_label('output',1,'Qe');\n"
 	    Object {
 	      $PropName		      "Parameters"
-	      $ObjectID		      162
+	      $ObjectID		      167
 	      $ClassName	      "Simulink.MaskParameter"
 	      Type		      "edit"
 	      Name		      "n_comp"
@@ -6207,7 +6670,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    163
+	    $ObjectID		    168
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "CSO Typ B - Combined sewer overflow"
 	    Description		    "Combined sewer overflow structure. \nDiverts the inflow given into effluent and overflow. The m"
@@ -6224,28 +6687,28 @@ Model {
 	      Type		      "Simulink.MaskParameter"
 	      Dimension		      4
 	      Object {
-		$ObjectID		164
+		$ObjectID		169
 		Type			"edit"
 		Name			"Vmax"
 		Prompt			"Basin Volume (m3)"
 		Value			"Vsmax"
 	      }
 	      Object {
-		$ObjectID		165
+		$ObjectID		170
 		Type			"edit"
 		Name			"Qemax"
 		Prompt			"Maximum Effluent flow [m3/s]"
 		Value			"Qemax"
 	      }
 	      Object {
-		$ObjectID		166
+		$ObjectID		171
 		Type			"edit"
 		Name			"n_comp"
 		Prompt			"Number of Pollutants [-]"
 		Value			"n_comp"
 	      }
 	      Object {
-		$ObjectID		167
+		$ObjectID		172
 		Type			"edit"
 		Name			"n_sed"
 		Prompt			"n-sed (Vect. of Sed. Coefficients)"
@@ -6496,7 +6959,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		168
+	$ObjectID		173
 	$ClassName		"Simulink.Mask"
 	Type			"Retention Catchment SSS"
 	Description		"Hydrological model of an urban catchment with a separate sewer system. \nIncluding additional retention"
@@ -6516,84 +6979,84 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  12
 	  Object {
-	    $ObjectID		    169
+	    $ObjectID		    174
 	    Type		    "edit"
 	    Name		    "area"
 	    Prompt		    "Area in [ha]"
 	    Value		    "input_c(1,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    170
+	    $ObjectID		    175
 	    Type		    "edit"
 	    Name		    "rfcoeff"
 	    Prompt		    "Runoff coefficient (0 - 1)"
 	    Value		    "input_c(2,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    171
+	    $ObjectID		    176
 	    Type		    "edit"
 	    Name		    "initloss"
 	    Prompt		    "Initial Loss in [mm]"
 	    Value		    "input_c(3,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    172
+	    $ObjectID		    177
 	    Type		    "edit"
 	    Name		    "permloss"
 	    Prompt		    "Permanent loss in [mm/day]"
 	    Value		    "input_c(4,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    173
+	    $ObjectID		    178
 	    Type		    "edit"
 	    Name		    "N"
 	    Prompt		    "No of Timesteps (transport time) / No of subareas n [-]"
 	    Value		    "input_c(5,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    174
+	    $ObjectID		    179
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "No of pollutant components"
 	    Value		    "CD2_get_substances_count"
 	  }
 	  Object {
-	    $ObjectID		    175
+	    $ObjectID		    180
 	    Type		    "edit"
 	    Name		    "Rain_C"
 	    Prompt		    "Vector of Rain-Conc. [g/m3]"
 	    Value		    "input_c(6,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    176
+	    $ObjectID		    181
 	    Type		    "edit"
 	    Name		    "K"
 	    Prompt		    "K"
 	    Value		    "300"
 	  }
 	  Object {
-	    $ObjectID		    177
+	    $ObjectID		    182
 	    Type		    "edit"
 	    Name		    "X"
 	    Prompt		    "X"
 	    Value		    "input_c(7,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    178
+	    $ObjectID		    183
 	    Type		    "edit"
 	    Name		    "Vsmax"
 	    Prompt		    "Storage volume [m3]"
 	    Value		    "input_c(8,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    179
+	    $ObjectID		    184
 	    Type		    "edit"
 	    Name		    "Qemax"
 	    Prompt		    "Maxiumum effluent flow [m3/s]"
 	    Value		    "input_c(9,get_blocks_id)"
 	  }
 	  Object {
-	    $ObjectID		    180
+	    $ObjectID		    185
 	    Type		    "edit"
 	    Name		    "n_sed"
 	    Prompt		    "n-sed (Vect. of Sed. Coefficients)"
@@ -6683,7 +7146,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    181
+	    $ObjectID		    186
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Catchment SSS - Type B"
 	    Description		    "Simple model of an urban catchment. \nInput ( r ) is a continuous stream of rain data in [mm/DT"
@@ -6707,63 +7170,63 @@ Model {
 	      Type		      "Simulink.MaskParameter"
 	      Dimension		      9
 	      Object {
-		$ObjectID		182
+		$ObjectID		187
 		Type			"edit"
 		Name			"area"
 		Prompt			"Area in [ha]"
 		Value			"area"
 	      }
 	      Object {
-		$ObjectID		183
+		$ObjectID		188
 		Type			"edit"
 		Name			"rfcoeff"
 		Prompt			"Runoff coefficient (0 - 1)"
 		Value			"rfcoeff"
 	      }
 	      Object {
-		$ObjectID		184
+		$ObjectID		189
 		Type			"edit"
 		Name			"initloss"
 		Prompt			"Initial Loss in [mm]"
 		Value			"initloss"
 	      }
 	      Object {
-		$ObjectID		185
+		$ObjectID		190
 		Type			"edit"
 		Name			"permloss"
 		Prompt			"Permanent loss in [mm/day]"
 		Value			"permloss"
 	      }
 	      Object {
-		$ObjectID		186
+		$ObjectID		191
 		Type			"edit"
 		Name			"N"
 		Prompt			"No of Timesteps (transport time) / No of subareas n [-]"
 		Value			"N"
 	      }
 	      Object {
-		$ObjectID		187
+		$ObjectID		192
 		Type			"edit"
 		Name			"n_comp"
 		Prompt			"No of pollutant components"
 		Value			"n_comp"
 	      }
 	      Object {
-		$ObjectID		188
+		$ObjectID		193
 		Type			"edit"
 		Name			"Rain_C"
 		Prompt			"Vector of Rain-Conc. [g/m3]"
 		Value			"Rain_C"
 	      }
 	      Object {
-		$ObjectID		189
+		$ObjectID		194
 		Type			"edit"
 		Name			"K"
 		Prompt			"K"
 		Value			"K"
 	      }
 	      Object {
-		$ObjectID		190
+		$ObjectID		195
 		Type			"edit"
 		Name			"X"
 		Prompt			"X"
@@ -7134,7 +7597,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    191
+	    $ObjectID		    196
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Mixer"
 	    Description		    "Performes mixing of pollutant fluxes Q1 and Q2 in accordance to their hydraulic load.\n\nFuncti"
@@ -7146,7 +7609,7 @@ Model {
 	    "Q1');\nport_label('input',2,'Q2');\nport_label('output',1,'Qe');\n"
 	    Object {
 	      $PropName		      "Parameters"
-	      $ObjectID		      192
+	      $ObjectID		      197
 	      $ClassName	      "Simulink.MaskParameter"
 	      Type		      "edit"
 	      Name		      "n_comp"
@@ -7272,7 +7735,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    193
+	    $ObjectID		    198
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "CSO Typ B - Combined sewer overflow"
 	    Description		    "Combined sewer overflow structure. \nDiverts the inflow given into effluent and overflow. The m"
@@ -7289,28 +7752,28 @@ Model {
 	      Type		      "Simulink.MaskParameter"
 	      Dimension		      4
 	      Object {
-		$ObjectID		194
+		$ObjectID		199
 		Type			"edit"
 		Name			"Vmax"
 		Prompt			"Basin Volume (m3)"
 		Value			"Vsmax"
 	      }
 	      Object {
-		$ObjectID		195
+		$ObjectID		200
 		Type			"edit"
 		Name			"Qemax"
 		Prompt			"Maximum Effluent flow [m3/s]"
 		Value			"Qemax"
 	      }
 	      Object {
-		$ObjectID		196
+		$ObjectID		201
 		Type			"edit"
 		Name			"n_comp"
 		Prompt			"Number of Pollutants [-]"
 		Value			"n_comp"
 	      }
 	      Object {
-		$ObjectID		197
+		$ObjectID		202
 		Type			"edit"
 		Name			"n_sed"
 		Prompt			"n-sed (Vect. of Sed. Coefficients)"
@@ -7603,7 +8066,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		198
+	$ObjectID		203
 	$ClassName		"Simulink.Mask"
 	Type			"Retention Sewer"
 	Description		"Function used:\nCD1_sfun_Muskingum_Sewer.m"
@@ -7619,49 +8082,49 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  7
 	  Object {
-	    $ObjectID		    199
+	    $ObjectID		    204
 	    Type		    "edit"
 	    Name		    "K"
 	    Prompt		    "K (travel time of a subreach) [s]"
 	    Value		    "300"
 	  }
 	  Object {
-	    $ObjectID		    200
+	    $ObjectID		    205
 	    Type		    "edit"
 	    Name		    "X"
 	    Prompt		    "X (weighing factor)  [ - ]"
 	    Value		    "0.1"
 	  }
 	  Object {
-	    $ObjectID		    201
+	    $ObjectID		    206
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "Number of pollutants [ - ]"
 	    Value		    "CD2_get_substances_count"
 	  }
 	  Object {
-	    $ObjectID		    202
+	    $ObjectID		    207
 	    Type		    "edit"
 	    Name		    "N"
 	    Prompt		    "Number of sub-reaches [ - ]"
 	    Value		    "11"
 	  }
 	  Object {
-	    $ObjectID		    203
+	    $ObjectID		    208
 	    Type		    "edit"
 	    Name		    "Vsmax"
 	    Prompt		    "Storage volume [m3]"
 	    Value		    "100"
 	  }
 	  Object {
-	    $ObjectID		    204
+	    $ObjectID		    209
 	    Type		    "edit"
 	    Name		    "Qemax"
 	    Prompt		    "Maximum effluent flow [m3/s]"
 	    Value		    "0.18"
 	  }
 	  Object {
-	    $ObjectID		    205
+	    $ObjectID		    210
 	    Type		    "edit"
 	    Name		    "n_sed"
 	    Prompt		    "n-sed (Vect. of Sed. Coefficients)"
@@ -7729,7 +8192,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    206
+	    $ObjectID		    211
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Mixer"
 	    Description		    "Performes mixing of pollutant fluxes Q1 and Q2 in accordance to their hydraulic load.\n\nFuncti"
@@ -7741,7 +8204,7 @@ Model {
 	    "Q1');\nport_label('input',2,'Q2');\nport_label('output',1,'Qe');\n"
 	    Object {
 	      $PropName		      "Parameters"
-	      $ObjectID		      207
+	      $ObjectID		      212
 	      $ClassName	      "Simulink.MaskParameter"
 	      Type		      "edit"
 	      Name		      "n_comp"
@@ -7867,7 +8330,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    208
+	    $ObjectID		    213
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Muskingum simplified scheme for Sewer"
 	    Description		    "Function used:\nCD1_sfun_Muskingum_Sewer.m"
@@ -7883,28 +8346,28 @@ Model {
 	      Type		      "Simulink.MaskParameter"
 	      Dimension		      4
 	      Object {
-		$ObjectID		209
+		$ObjectID		214
 		Type			"edit"
 		Name			"K"
 		Prompt			"K (travel time of a subreach) [s]"
 		Value			"K"
 	      }
 	      Object {
-		$ObjectID		210
+		$ObjectID		215
 		Type			"edit"
 		Name			"X"
 		Prompt			"X (weighing factor)  [ - ]"
 		Value			"X"
 	      }
 	      Object {
-		$ObjectID		211
+		$ObjectID		216
 		Type			"edit"
 		Name			"n_comp"
 		Prompt			"Number of pollutants [ - ]"
 		Value			"n_comp"
 	      }
 	      Object {
-		$ObjectID		212
+		$ObjectID		217
 		Type			"edit"
 		Name			"N"
 		Prompt			"N (Number of sub-reaches) [ - ]"
@@ -8020,7 +8483,7 @@ Model {
 	  Variant		  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    213
+	    $ObjectID		    218
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "CSO Typ B - Combined sewer overflow"
 	    Description		    "Combined sewer overflow structure. \nDiverts the inflow given into effluent and overflow. The m"
@@ -8037,28 +8500,28 @@ Model {
 	      Type		      "Simulink.MaskParameter"
 	      Dimension		      4
 	      Object {
-		$ObjectID		214
+		$ObjectID		219
 		Type			"edit"
 		Name			"Vmax"
 		Prompt			"Basin Volume (m3)"
 		Value			"Vsmax"
 	      }
 	      Object {
-		$ObjectID		215
+		$ObjectID		220
 		Type			"edit"
 		Name			"Qemax"
 		Prompt			"Maximum Effluent flow [m3/s]"
 		Value			"Qemax"
 	      }
 	      Object {
-		$ObjectID		216
+		$ObjectID		221
 		Type			"edit"
 		Name			"n_comp"
 		Prompt			"Number of Pollutants [-]"
 		Value			"n_comp"
 	      }
 	      Object {
-		$ObjectID		217
+		$ObjectID		222
 		Type			"edit"
 		Name			"n_sed"
 		Prompt			"n-sed (Vect. of Sed. Coefficients)"
@@ -8294,7 +8757,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		218
+	$ObjectID		223
 	$ClassName		"Simulink.Mask"
 	Type			"Set Q/C"
 	Description		"Set concentrations of pollutants and/or Q in flow.\n\nFunction used:\nCD2_sfun_mixing_QC_subs.m"
@@ -8307,14 +8770,14 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  2
 	  Object {
-	    $ObjectID		    219
+	    $ObjectID		    224
 	    Type		    "edit"
 	    Name		    "subs_vect"
 	    Prompt		    "Added substances vector"
 	    Value		    "'Temp'"
 	  }
 	  Object {
-	    $ObjectID		    220
+	    $ObjectID		    225
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "Number of pollutants [ - ]"
@@ -8434,7 +8897,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		221
+	$ObjectID		226
 	$ClassName		"Simulink.Mask"
 	Type			"Set-Global-Param"
 	Description		"This block is designed to set a global parameter(variable) at the workspace, prior the simulation start"
@@ -8447,14 +8910,14 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  2
 	  Object {
-	    $ObjectID		    222
+	    $ObjectID		    227
 	    Type		    "edit"
 	    Name		    "Vname"
 	    Prompt		    "Variables names"
 	    Value		    "Crain"
 	  }
 	  Object {
-	    $ObjectID		    223
+	    $ObjectID		    228
 	    Type		    "edit"
 	    Name		    "Vvalue"
 	    Prompt		    "Variables values"
@@ -8492,7 +8955,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		224
+	$ObjectID		229
 	$ClassName		"Simulink.Mask"
 	Type			"Sewer"
 	Description		"Function used:\nCD1_sfun_Muskingum_Sewer.m"
@@ -8508,28 +8971,28 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  4
 	  Object {
-	    $ObjectID		    225
+	    $ObjectID		    230
 	    Type		    "edit"
 	    Name		    "K"
 	    Prompt		    "K (travel time of a subreach) [s]"
 	    Value		    "300"
 	  }
 	  Object {
-	    $ObjectID		    226
+	    $ObjectID		    231
 	    Type		    "edit"
 	    Name		    "X"
 	    Prompt		    "X (weighing factor)  [ - ]"
 	    Value		    "0.1"
 	  }
 	  Object {
-	    $ObjectID		    227
+	    $ObjectID		    232
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "Number of pollutants [ - ]"
 	    Value		    "CD2_get_substances_count"
 	  }
 	  Object {
-	    $ObjectID		    228
+	    $ObjectID		    233
 	    Type		    "edit"
 	    Name		    "N"
 	    Prompt		    "N (Number of sub-reaches) [ - ]"
@@ -8645,7 +9108,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		229
+	$ObjectID		234
 	$ClassName		"Simulink.Mask"
 	Type			"Splitter"
 	Description		"Splitter parameter."
@@ -8660,21 +9123,21 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  3
 	  Object {
-	    $ObjectID		    230
+	    $ObjectID		    235
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "Number of components"
 	    Value		    "CD2_get_substances_count"
 	  }
 	  Object {
-	    $ObjectID		    231
+	    $ObjectID		    236
 	    Type		    "edit"
 	    Name		    "values"
 	    Prompt		    "Fraction / Amount directed to Q1"
 	    Value		    "40"
 	  }
 	  Object {
-	    $ObjectID		    232
+	    $ObjectID		    237
 	    Type		    "popup"
 	    Array {
 	      Type		      "Cell"
@@ -8807,7 +9270,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		233
+	$ObjectID		238
 	$ClassName		"Simulink.Mask"
 	Type			"Filter"
 	Description		"Filters input for a set of element(Flow and concnetrations).\n\nFunction used:\nCD2_sfun_out_subs.m"
@@ -8820,14 +9283,14 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  2
 	  Object {
-	    $ObjectID		    234
+	    $ObjectID		    239
 	    Type		    "edit"
 	    Name		    "subs_vect"
 	    Prompt		    "Added substances vector"
 	    Value		    "'CO2 CO2'"
 	  }
 	  Object {
-	    $ObjectID		    235
+	    $ObjectID		    240
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "Number of pollutants [ - ]"
@@ -8910,7 +9373,7 @@ Model {
       EnableBusSupport	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		236
+	$ObjectID		241
 	$ClassName		"Simulink.Mask"
 	Type			"Cumulation of Masses"
 	Description		"This block returns the total hydraulic load V [m3] and the pollutant load M [g] during the simulation r"
@@ -8921,7 +9384,7 @@ Model {
 	Display			"plot(0,0,100,100);\ntext(50,50,'Sum QC(t)','HorizontalAlignment','center');"
 	Object {
 	  $PropName		  "Parameters"
-	  $ObjectID		  237
+	  $ObjectID		  242
 	  $ClassName		  "Simulink.MaskParameter"
 	  Type			  "edit"
 	  Name			  "n_p"
@@ -8942,7 +9405,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		238
+	$ObjectID		243
 	$ClassName		"Simulink.Mask"
 	Type			"Switcher"
 	Description		"Switching of flows Q1 and Q2 in accordance the mask parameter switch.\nSwitch=1 => Q1\nSwitch=0 => Q2\n"
@@ -8956,14 +9419,14 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  2
 	  Object {
-	    $ObjectID		    239
+	    $ObjectID		    244
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "Number of pollutants [ - ]"
 	    Value		    "CD2_get_substances_count"
 	  }
 	  Object {
-	    $ObjectID		    240
+	    $ObjectID		    245
 	    Type		    "edit"
 	    Name		    "wechsler"
 	    Prompt		    "Switch"
@@ -9107,7 +9570,7 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		241
+	$ObjectID		246
 	$ClassName		"Simulink.Mask"
 	Type			"WWTP"
 	Description		"Simple WWTP model. Inflow given is treated according to userdefined maximum concnetration limits and tr"
@@ -9125,21 +9588,21 @@ Model {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  3
 	  Object {
-	    $ObjectID		    242
+	    $ObjectID		    247
 	    Type		    "edit"
 	    Name		    "REmin"
 	    Prompt		    "Removal Efficiency REmin [-]"
 	    Value		    "[0.85 0.8 0.75]"
 	  }
 	  Object {
-	    $ObjectID		    243
+	    $ObjectID		    248
 	    Type		    "edit"
 	    Name		    "Cemax"
 	    Prompt		    "Maximum effluent concnetration Cemax [g/m³]"
 	    Value		    "[5 .2 .5]"
 	  }
 	  Object {
-	    $ObjectID		    244
+	    $ObjectID		    249
 	    Type		    "edit"
 	    Name		    "n_comp"
 	    Prompt		    "Number of Components ()"
@@ -9321,5 +9784,192 @@ Model {
       FontSize		      12
       FontWeight	      "bold"
     }
+  }
+}
+#Finite State Machines
+#
+#   Stateflow 80000006
+#
+#
+Stateflow {
+  machine {
+    id			    1
+    name		    "CD2_Library"
+    created		    "21-Feb-2017 15:36:19"
+    isLibrary		    0
+    firstTarget		    11
+    sfVersion		    80000006
+  }
+  chart {
+    id			    2
+    name		    "RUEB/Through and RUEB flows\n"
+    windowPosition	    [422 539.941 189 413]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 3600 1200 1.180555555555556]
+    treeNode		    [0 3 0 0]
+    firstTransition	    9
+    firstJunction	    8
+    viewObj		    2
+    machine		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    7
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    4
+    chartFileNumber	    21
+    disableImplicitCasting  1
+    eml {
+      name		      "fcn"
+    }
+  }
+  state {
+    id			    3
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 0 0]
+    superState		    SUBCHART
+    subviewer		    2
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [Qrueb, Qthrough] = fcn(Qsoll, Qin)\n%#codegen\nQthrough = Qin;\nQrueb = Qin;\nQthrough("
+      "1) = min(Qsoll, Qin(1));\n\nQrueb(1) = max(Qin(1)-Qthrough(1), 0);\n\nif(abs(Qthrough(1)+Qrueb(1)-Qin(1))>1e-6)\n"
+      "    error('this should never happen');\nend\n\nend"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    4
+    ssIdNumber		    7
+    name		    "Qrueb"
+    linkNode		    [2 0 5]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    5
+    ssIdNumber		    4
+    name		    "Qsoll"
+    linkNode		    [2 4 6]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    6
+    ssIdNumber		    5
+    name		    "Qthrough"
+    linkNode		    [2 5 7]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    7
+    ssIdNumber		    6
+    name		    "Qin"
+    linkNode		    [2 6 0]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    8
+    position		    [23.5747 49.5747 7]
+    chart		    2
+    linkNode		    [2 0 0]
+    subviewer		    2
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    9
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [28.125 13.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      8
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    2
+    linkNode		    [2 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    10
+    name		    "RUEB/Through and RUEB flows\n"
+    machine		    1
+    chart		    2
+  }
+  target {
+    id			    11
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    machine		    1
+    linkNode		    [1 0 0]
   }
 }

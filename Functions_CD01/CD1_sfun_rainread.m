@@ -76,7 +76,7 @@ switch flag,
 	  
 	  % enlarge table by one entry to catch 
 	  % handling for boundary conditions
-	  table=[table; table(end,1)+tablestep -1]; %tablestep length of time step in table
+	  table=[table; table(end,1)+tablestep 0]; %tablestep length of time step in table
 	  
 	  % calc eventStart for cyclic repitation
 	  if strcmp(crep,'on')  
@@ -86,76 +86,10 @@ switch flag,
 	  end
 	  eventEnd=eventStart+tstep;
 	  retval=0; %set return sum to zero
-	 
-	  starti=floor(eventStart/tablestep)+2;
-	  endi=ceil(eventEnd/tablestep)+1;
+      raindt = table(2,1) - table(1,1);
+      retval = interp1(table(:,1), table(:,2), t)*tstep/raindt;
       
       
-%       if endi>len
-%           error('unknown rainred error.');  
-%           t
-%           len
-%           eventStart
-%           eventEnd
-%           starti
-%           endi
-%           
-%       end
-      
-	  for i=starti:endi 
-          
-		  tableStart=table(i,1)-tablestep;
-		  tableEnd=table(i,1);
-		  
-		  %add only from table entry start
-		  if eventStart<=tableStart & eventEnd>tableStart & eventEnd<tableEnd
-%			  disp('In 1');
-%			  eventStart
-%			  eventEnd
-%			  tableStart
-%			  tableEnd
-			
-			  tp=(eventEnd-tableStart)/tablestep;
-			  retval=retval+table(i,2)*tp;
-		  end
-		  
-		  %add only from table entry end
-		  if eventStart>tableStart & eventStart<tableEnd & eventEnd>=tableEnd
-%			  			disp('In 2');
-%			  			eventStart
-%			  			eventEnd
-%		  			tableStart
-%			  			tableEnd
-			  
-			  tp=(tableEnd-eventStart)/tablestep;
-			  retval=retval+table(i,2)*tp;
-		  end
-		    
-		  %add whole table entry
-		  if eventStart<=tableStart & tableEnd<=eventEnd
-%			  			disp('3');
-%			  			eventStart
-%			  			eventEnd
-%			  			tableStart
-%			  			tableEnd
-			  
-			  retval=retval+table(i,2);
-		  end
-		  
-		  %add only middle part from table entry		
-		  if eventStart>tableStart & tableEnd>eventEnd
-%			  			disp('4');
-%			  			eventStart
-%			  			eventEnd
-%			  			tableStart
-%			  			tableEnd
-			  tp=(eventEnd-eventStart)/tablestep;
-			  retval=retval+table(i,2)*tp;
-		  end 
-	  end
-	  
-%	  disp('---------------------------------------');
-
       u_dat.time=[eventStart eventEnd];
       set_param(gcb,'UserData',u_dat);
 	  sys=retval;
